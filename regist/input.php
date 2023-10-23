@@ -1,10 +1,15 @@
 <?php
-//セッション開始
-session_start();
-session_regenerate_id(true);
-// var_dump($_SESSION['regist']);
+require_once('../app.php');
+
 if (!empty($_SESSION['regist'])) {
     $regist = $_SESSION['regist'];
+}
+
+//セッションにエラーがあれば取得
+if (!empty($_SESSION['errors'])) {
+    //セッションのエラー削除
+    $errors = $_SESSION['errors'];
+    unset($_SESSION['errors']);
 }
 ?>
 
@@ -24,17 +29,21 @@ if (!empty($_SESSION['regist'])) {
                 <div class="form-floating mb-2">
                     <input type="text" name="name" value="<?= @$regist['name'] ?>" class="form-control">
                     <label for="" class="form-label">Name</label>
+                    <p class="text-danger"><?= @$errors['name'] ?></p>
                 </div>
                 <div class="form-floating mb-2">
                     <input type="email" name="email" value="<?= @$regist['email'] ?>" class="form-control">
                     <label for="" class="form-label">Email</label>
+                    <p class="text-danger"><?= @$errors['email'] ?></p>
                 </div>
                 <div class="form-floating mb-2">
                     <input type="password" name="password" class="form-control">
                     <label for="" class="form-label">Password</label>
+                    <p class="text-danger"><?= @$errors['password'] ?></p>
                 </div>
                 <div>
-                    <button class="w-100 btn btn-primary">Regist</button>
+                    <button class="w-100 mb-2 btn btn-primary">Regist</button>
+                    <a href="../login/" class="w-100 btn btn-outline-primary">Sign in</a>
                 </div>
             </form>
         </div>

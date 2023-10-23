@@ -15,9 +15,10 @@ $_SESSION['regist'] = $_POST;
 // バリデーション
 $errors = validate($post);
 
-
 // エラーだったら、入力画面にリダイレクト(URL転送)
 if ($errors) {
+    // エラーをセッションに登録
+    $_SESSION['errors'] = $errors;
     header('Location: input.php');
     exit;
 }
