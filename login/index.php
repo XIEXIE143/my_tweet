@@ -30,7 +30,8 @@ if (!empty($_SESSION['user'])) {
                     <label for="" class="form-label">Password</label>
                 </div>
                 <div>
-                    <button class="w-100 btn btn-primary">Sign in</button>
+                    <button class="w-100 mb-2 btn btn-primary">Sign in</button>
+                    <a href="../regist" class="w-100 btn btn-outline-primary">Regist</a>
                 </div>
             </form>
         </div>
