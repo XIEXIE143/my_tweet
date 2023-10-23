@@ -14,7 +14,7 @@
             <h2 class="h2 mb-3 fw-normal text-center">Regist</h2>
             <p>登録が完了しました</p>
             <div>
-                <a href="../logout/" class="w-100 btn btn-outline-primary">Sign in</a>
+                <a href="../login/" class="w-100 btn btn-outline-primary">Sign in</a>
             </div>
         </div>
     </main>

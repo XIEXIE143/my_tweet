@@ -8,7 +8,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('can not get access');
 }
 // POSTリクエストされたデータを取得
-$post = $_POST;
+// サニタイズ（エスケープ処理）
+$post = check($_POST);
 
 // POSTデータをセッションに保存
 $_SESSION['regist'] = $_POST;
@@ -25,7 +26,8 @@ if ($errors) {
 //デバッグ関数で確認
 // var_dump($post);
 
-function validate($data) {
+function validate($data)
+{
     $errors = [];
     if (empty($data['name'])) {
         $errors['name'] = "Nameが入力されていません";
@@ -38,16 +40,30 @@ function validate($data) {
     }
     return $errors;
 }
+
+/**
+ * サニタイズ（エスケープ処理）
+ */
+function check($posts)
+{
+    if (empty($posts)) return;
+    foreach ($posts as $column => $post) {
+        $posts[$column] = htmlspecialchars($post, ENT_QUOTES, 'UTF-8');
+    }
+    return $posts;
+}
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Tweet</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
+
 <body>
     <main id="id" class="d-flex justify-content-center">
         <div class="w-50 mt-3 p-5 bg-light">
@@ -71,4 +87,5 @@ function validate($data) {
         </div>
     </main>
 </body>
+
 </html>
