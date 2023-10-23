@@ -1,7 +1,5 @@
 <?php
-//セッション開始
-session_start();
-session_regenerate_id(true);
+require_once('../app.php');
 
 // POSTリクエスト以外は処理しない
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
@@ -16,6 +14,7 @@ $_SESSION['regist'] = $_POST;
 
 // バリデーション
 $errors = validate($post);
+
 
 // エラーだったら、入力画面にリダイレクト(URL転送)
 if ($errors) {
@@ -34,10 +33,17 @@ function validate($data)
     }
     if (empty($data['email'])) {
         $errors['email'] = "Emailが入力されていません";
+    } else {
+        // Emailが既に登録されているか？チェック
+        $user = new User();
+        if ($user->findByEmail($data['email'])) {
+            $errors['email'] = "Emailは既に登録されています。";
+        }
     }
     if (empty($data['password'])) {
         $errors['password'] = "Passwordが入力されていません";
     }
+
     return $errors;
 }
 

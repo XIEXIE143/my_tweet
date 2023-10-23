@@ -9,7 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // セッションから入力されたデータを取得
 $post = $_SESSION['regist'];
 
-// TODO: MySQLに保存(SQL INSERT)
+
+// MySQLに保存(SQL INSERT)
 $user = new User();
 if ($user->insert($post)) {
     //成功
