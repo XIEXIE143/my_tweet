@@ -6,8 +6,31 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // POSTリクエストされたデータを取得
 $post = $_POST;
 
+// バリデーション
+$errors = validate($post);
+
+// エラーだったら、入力画面にリダイレクト
+if ($errors) {
+    header('Location: input.php');
+    exit;
+}
+
 //デバッグ関数で確認
 // var_dump($post);
+
+function validate($data) {
+    $errors = [];
+    if (empty($data['name'])) {
+        $errors['name'] = "Nameが入力されていません";
+    }
+    if (empty($data['email'])) {
+        $errors['email'] = "Emailが入力されていません";
+    }
+    if (empty($data['password'])) {
+        $errors['password'] = "Passwordが入力されていません";
+    }
+    return $errors;
+}
 ?>
 
 <!DOCTYPE html>
