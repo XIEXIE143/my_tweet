@@ -1,3 +1,11 @@
+<?php
+// POSTリクエストされたデータを取得
+$post = $_POST;
+
+//デバッグ関数で確認
+// var_dump($post);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,11 +22,12 @@
             <form action="" method="post">
                 <div class="mb-2">
                     <label for="" class="form-label">Name</label>
-                    xxxx
+                    <!-- PHPの変数を表示 -->
+                    <?= $post['name'] ?>
                 </div>
                 <div class="mb-2">
                     <label for="" class="form-label">Email</label>
-                    xxxx
+                    <?= $post['email'] ?>
                 </div>
                 <div>
                     <button class="w-100 mb-2 btn btn-primary">Regist</button>
