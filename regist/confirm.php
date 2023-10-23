@@ -1,4 +1,8 @@
 <?php
+// POSTリクエスト以外は処理しない
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    exit('can not get access');
+}
 // POSTリクエストされたデータを取得
 $post = $_POST;
 

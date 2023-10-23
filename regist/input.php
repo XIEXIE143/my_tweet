@@ -9,8 +9,8 @@
 <body>
     <main id="id" class="d-flex justify-content-center">
         <div class="w-50 mt-3 p-5 bg-light">
-            <h2 class="h2 mb-3 fw-normal">Regist</h2>
-            <form action="" method="post">
+            <h2 class="h2 mb-3 fw-normal text-center">Regist</h2>
+            <form action="confirm.php" method="post">
                 <div class="form-floating mb-2">
                     <input type="text" name="name" class="form-control">
                     <label for="" class="form-label">Name</label>
