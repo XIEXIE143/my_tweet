@@ -1,4 +1,8 @@
 <?php
+//セッション開始
+session_start();
+session_regenerate_id(true);
+
 // POSTリクエスト以外は処理しない
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     exit('can not get access');
@@ -6,10 +10,13 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 // POSTリクエストされたデータを取得
 $post = $_POST;
 
+// POSTデータをセッションに保存
+$_SESSION['regist'] = $_POST;
+
 // バリデーション
 $errors = validate($post);
 
-// エラーだったら、入力画面にリダイレクト
+// エラーだったら、入力画面にリダイレクト(URL転送)
 if ($errors) {
     header('Location: input.php');
     exit;

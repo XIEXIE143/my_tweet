@@ -1,3 +1,13 @@
+<?php
+//セッション開始
+session_start();
+session_regenerate_id(true);
+// var_dump($_SESSION['regist']);
+if (!empty($_SESSION['regist'])) {
+    $regist = $_SESSION['regist'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +22,11 @@
             <h2 class="h2 mb-3 fw-normal text-center">Regist</h2>
             <form action="confirm.php" method="post">
                 <div class="form-floating mb-2">
-                    <input type="text" name="name" class="form-control">
+                    <input type="text" name="name" value="<?= @$regist['name'] ?>" class="form-control">
                     <label for="" class="form-label">Name</label>
                 </div>
                 <div class="form-floating mb-2">
-                    <input type="email" name="email" class="form-control">
+                    <input type="email" name="email" value="<?= @$regist['email'] ?>" class="form-control">
                     <label for="" class="form-label">Email</label>
                 </div>
                 <div class="form-floating mb-2">
