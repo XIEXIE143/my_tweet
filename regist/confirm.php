@@ -53,7 +53,7 @@ function validate($data) {
         <div class="w-50 mt-3 p-5 bg-light">
             <h2 class="h2 mb-3 fw-normal text-center">Regist</h2>
             <p>この内容で登録しますか？</p>
-            <form action="" method="post">
+            <form action="add.php" method="post">
                 <div class="mb-2">
                     <label for="" class="form-label">Name</label>
                     <!-- PHPの変数を表示 -->
