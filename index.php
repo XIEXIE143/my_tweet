@@ -1,3 +1,17 @@
+<?php
+//セッション開始
+session_start();
+session_regenerate_id(true);
+
+// ログインユーザチェック
+$auth_user = $_SESSION['auth_user'];
+if (empty($auth_user)) {
+    //ユーザがいなかったら
+    header('Location: login/');
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
