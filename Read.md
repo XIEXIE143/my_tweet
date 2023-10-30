@@ -18,15 +18,8 @@ $tweets = $tweet->get();
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tweet</title>
-    <!-- Bootstrap5 -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/default.css">
-</head>
+<!-- コンポーネント -->
+<?php include('app/views/components/head.php') ?>
 
 <body>
 
@@ -48,6 +41,9 @@ $tweets = $tweet->get();
                         </li>
                     </ul>
                 </nav>
+                <div class="tweet-user">
+                    <span class="fw-bold">@<?= $auth_user['name'] ?></span>
+                </div>
             </header>
 
             <main class="col-md-9">
@@ -65,52 +61,54 @@ $tweets = $tweet->get();
 
                 <div class="row">
                     <!-- Tweetの繰り返し表示 -->
-                    <?php foreach($tweets as $value): ?>
-                    <div class="tweet d-flex">
-                        <!-- profile image -->
-                        <div class="profile-image">
-                            <img src="images/me.png">
-                        </div>
-                        <!-- tweet body -->
-                        <div class="tweet-body">
-                            <!-- user info -->
-                            <div class="tweet-user">
-                                <span class="fw-bold">@<?= $value['user_name'] ?></span>
-                                <span class="ms-1 text-secondary"><?= date('Y/m/d H:i', strtotime($value['created_at'])) ?></span>
+                    <?php foreach ($tweets as $value) : ?>
+                        <div class="tweet d-flex">
+                            <!-- profile image -->
+                            <div class="profile-image">
+                                <img src="images/me.png">
                             </div>
+                            <!-- tweet body -->
+                            <div class="tweet-body">
+                                <!-- user info -->
+                                <div class="tweet-user">
+                                    <span class="fw-bold">@<?= $value['user_name'] ?></span>
+                                    <span class="ms-1 text-secondary"><?= date('Y/m/d H:i', strtotime($value['created_at'])) ?></span>
+                                </div>
 
-                            <!-- post -->
-                            <div class="tweet-text mt-2 mb-2">
-                                <?= nl2br($value['message']) ?>
+                                <!-- post -->
+                                <div class="tweet-text mt-2 mb-2">
+                                    <?= nl2br($value['message']) ?>
+                                </div>
+
+                                <!-- tweet nav -->
+                                <nav class="tweet-nav">
+                                    <ul class="d-flex">
+                                        <li>
+                                            <a href="#">
+                                                <img src="svg/bubble.svg" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="svg/heart.svg" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <img src="svg/loop.svg" alt="">
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <?php if ($auth_user['id'] == $value['user_id']): ?>
+                                            <a href="tweet/delete.php?id=<?= $value['id'] ?>">
+                                                <img src="svg/trash.svg" alt="">
+                                            </a>
+                                            <?php endif ?>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div>
-
-                            <!-- tweet nav -->
-                            <nav class="tweet-nav">
-                                <ul class="d-flex">
-                                    <li>
-                                        <a href="#">
-                                            <img src="svg/bubble.svg" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="svg/heart.svg" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="svg/loop.svg" alt="">
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <img src="svg/trash.svg" alt="">
-                                        </a>
-                                    </li>
-                                </ul>
-                            </nav>
                         </div>
-                    </div>
                     <?php endforeach ?>
                 </div>
 
