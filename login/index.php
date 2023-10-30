@@ -3,6 +3,7 @@
 session_start();
 session_regenerate_id(true);
 
+//TODO: ログインチェック
 if (!empty($_SESSION['user'])) {
     $user = $_SESSION['user'];
 }
