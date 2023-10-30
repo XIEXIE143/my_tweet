@@ -57,10 +57,13 @@ class User extends Model
 
     public function insert($data)
     {
+        //パスワードをHash化
         $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        //usersにデータを挿入するSQL
         $sql = "INSERT INTO users (name, email, password)
                 VALUES (:name, :email, :password)";
         $stmt = $this->pdo->prepare($sql);
+        //MySQLに実行
         return $stmt->execute($data);
     }
 
